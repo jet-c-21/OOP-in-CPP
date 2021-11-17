@@ -11,10 +11,12 @@ int main() {
   if (n < 0)
     cout << "Error! Factorial of a negative number doesn't exist.";
   else {
-    for (int i = 1; i <= n; ++i) {
+    int i = 0;
+    cout << i << "! = " << 1 << endl;
+    for (i = 1; i <= n; ++i) {
       factorial *= i;
+      cout << i << "! = " << factorial << endl;
     }
-    cout << n << "! = " << factorial;
   }
 
   return 0;
