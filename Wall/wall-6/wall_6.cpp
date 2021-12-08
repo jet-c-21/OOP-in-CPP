@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main(void) {
+int go(void) {
   cout << "This computing environment uses:" << endl;
   cout << sizeof(char) << " bytes for chars" << endl;
   cout << sizeof(short int) << " bytes for shorts" << endl;
