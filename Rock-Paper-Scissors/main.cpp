@@ -39,7 +39,7 @@ void invalid_choice_prompt();
 void tie_prompt();
 void win_prompt();
 void lose_prompt();
-void comp_choice_prompt();
+void comp_choice_prompt(int comp_choice);
 void bye_prompt();
 
 int main() {
