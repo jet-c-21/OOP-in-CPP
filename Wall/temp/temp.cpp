@@ -30,20 +30,20 @@ inline int parent(int i) {
 }
 
 // Returns the index of
-// the left child node
-inline int left(int i) {
+// the left_child_node_idx child node
+inline int left_child_node_idx(int i) {
   return 2 * i + 1;
 }
 
 // Returns the index of
-// the right child node
-inline int right(int i) {
+// the right_child_node_idx child node
+inline int right_child_node_idx(int i) {
   return 2 * i + 2;
 }
 
 // Maintains the heap property
 void heapify(Heap &h, int i) {
-  int l = left(i), r = right(i), m = i;
+  int l = left_child_node_idx(i), r = right_child_node_idx(i), m = i;
   if (l < h.n && h.v[i] > h.v[l])
     m = l;
   if (r < h.n && h.v[m] > h.v[r])
@@ -64,7 +64,7 @@ int extractMin(Heap &h) {
   return m;
 }
 
-int findKthSmalles(Heap &h, int k) {
+int findKthSmallest(Heap &h, int k) {
   for (int i = 1; i < k; ++i)
     extractMin(h);
   return extractMin(h);
@@ -74,6 +74,6 @@ int main() {
   Heap h(7);
   h.v = vector<int>{10, 50, 40, 75, 60, 65, 45};
   int k = 2;
-  cout << findKthSmalles(h, k);
+  cout << findKthSmallest(h, k);
   return 0;
 }
