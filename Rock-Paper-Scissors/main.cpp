@@ -17,45 +17,37 @@ Scisscors : 3
 
 using namespace std;
 
-int game_count = 0;
-int tie_count = 0;
-int win_count = 0;
-int lose_count = 0;
+class RPS {
+ public:
+  int game_count = 0;
+  int tie_count = 0;
+  int win_count = 0;
+  int lose_count = 0;
 
-// operation funcs
-int get_comp_choice();
-int ask_play_check_input(string user_choice);
-int ask_play();
-int ask_user_rps_check_input(int user_choice);
-int ask_user_rps();
-int ask_replay();
-void judge(int user_choice, int comp_choice);
-void game();
-void show_summary();
+  // operation funcs
+  int get_comp_choice();
+  int ask_play_check_input(string user_choice);
+  int ask_play();
+  int ask_user_rps_check_input(int user_choice);
+  int ask_user_rps();
+  int ask_replay();
+  void judge(int user_choice, int comp_choice);
+  void game();
+  void show_summary();
+  void start();
 
-// prompt funcs
-void greet_prompt();
-void invalid_choice_prompt();
-void tie_prompt();
-void win_prompt();
-void lose_prompt();
-void comp_choice_prompt(int comp_choice);
-void bye_prompt();
+  // prompt funcs
+  void greet_prompt();
+  void invalid_choice_prompt();
+  void tie_prompt();
+  void win_prompt();
+  void lose_prompt();
+  void comp_choice_prompt(int comp_choice);
+  void bye_prompt();
 
-int main() {
-  greet_prompt();
+};
 
-  if (ask_play()) {
-    game();
-    show_summary();
-  };
-
-  bye_prompt();
-
-  return 0;
-}
-
-void game() {
+void RPS::game() {
   game_count += 1;
 
   int user_choice = ask_user_rps();
@@ -66,40 +58,40 @@ void game() {
   if (ask_replay()) game();
 }
 
-void show_summary() {
+void RPS::show_summary() {
   double win_rate = 0.0f;
   if ((win_count + lose_count) != 0) {
-    win_rate = win_count / (double)(win_count + lose_count);
+    win_rate = (win_count / (double) (win_count + lose_count)) * 100;
   }
   cout << endl;
   cout << "You've played " << game_count << " games." << endl;
   cout << "Tie Count: " << tie_count << endl;
   cout << "Win Count: " << win_count << endl;
   cout << "Lose Count: " << lose_count << endl;
-  cout << "Win Rate: " << win_rate << endl;
+  cout << "Win Rate: " << win_rate << "%" << endl;
 }
 
-int get_comp_choice() {
+int RPS::get_comp_choice() {
   srand(time(NULL));
   return rand() % 3 + 1;
 }
 
-void greet_prompt() {
+void RPS::greet_prompt() {
   string greet = "Welcome to the Rock, Paper, Scisscors Game!";
   cout << greet << endl;
 }
 
-void invalid_choice_prompt() {
+void RPS::invalid_choice_prompt() {
   string msg = "\nInvalid Command! Please try again.";
   cout << msg << endl;
 }
 
-int ask_play_check_input(string user_choice) {
+int RPS::ask_play_check_input(string user_choice) {
   if (user_choice == "y" || user_choice == "n") return 1;
   return 0;
 }
 
-int ask_play() {
+int RPS::ask_play() {
   while (1) {
     string msg = "\nDo you want to play? (Please enter y or n)";
     cout << msg << endl;
@@ -116,12 +108,12 @@ int ask_play() {
   }
 }
 
-int ask_user_rps_check_input(int user_choice) {
+int RPS::ask_user_rps_check_input(int user_choice) {
   if (user_choice == 1 || user_choice == 2 || user_choice == 3) return 1;
   return 0;
 }
 
-int ask_user_rps() {
+int RPS::ask_user_rps() {
   // ask user's choice of Rock or Paper or Scissors
   while (1) {
     string msg =
@@ -143,41 +135,38 @@ int ask_user_rps() {
   }
 }
 
-void tie_prompt() {
+void RPS::tie_prompt() {
   cout << "Seems we are tied." << endl;
   tie_count += 1;
 }
 
-void win_prompt() {
+void RPS::win_prompt() {
   cout << "Oh! You win." << endl;
   win_count += 1;
 }
 
-void lose_prompt() {
+void RPS::lose_prompt() {
   cout << "Ha! Loser." << endl;
   lose_count += 1;
 }
 
-void comp_choice_prompt(int comp_choice) {
+void RPS::comp_choice_prompt(int comp_choice) {
   cout << "Computer:" << endl;
   switch (comp_choice) {
-    case 1:
-      cout << rock << endl;
+    case 1:cout << rock << endl;
       break;
 
-    case 2:
-      cout << paper << endl;
+    case 2:cout << paper << endl;
       break;
 
-    case 3:
-      cout << scissors << endl;
+    case 3:cout << scissors << endl;
       break;
   }
 }
 
-void bye_prompt() { cout << "\nBye Bye! See you next time."; }
+void RPS::bye_prompt() { cout << "\nBye Bye! See you next time."; }
 
-void judge(int user_choice, int comp_choice) {
+void RPS::judge(int user_choice, int comp_choice) {
   if (user_choice == comp_choice) {
     tie_prompt();
     return;
@@ -210,7 +199,7 @@ void judge(int user_choice, int comp_choice) {
   }
 }
 
-int ask_replay() {
+int RPS::ask_replay() {
   while (1) {
     string msg = "\nDo you want to play again? (Please enter y or n)";
     cout << msg << endl;
@@ -225,4 +214,22 @@ int ask_replay() {
       invalid_choice_prompt();
     }
   }
+}
+
+void RPS::start() {
+  greet_prompt();
+
+  if (ask_play()) {
+    game();
+    show_summary();
+  };
+
+  bye_prompt();
+}
+
+int main() {
+  RPS rps;
+  rps.start();
+
+  return 0;
 }

@@ -1,79 +1,24 @@
-// C++ program to find k-th smallest
-// element in Min Heap.
-#include <iostream>
-#include <vector>
+//What is the output of the following snippet?
 
+#include <iostream>
 using namespace std;
 
-// Structure for the heap
-struct Heap {
-  vector<int> v;
-  int n; // Size of the heap
-
-  explicit Heap(int i = 0): n(i) {
-    v = vector<int>(n);
+class A {
+ public:
+  A(float v) { A::v = v; }
+  float v;
+  float set(float v) {
+    A::v = v;
+    return v;
+  }
+  float get(float v) {
+    return A::v;
   }
 };
 
-// Generic function to
-// swap two integers
-void swap(int &a, int &b) {
-  int temp = a;
-  a = b;
-  b = temp;
-}
-
-// Returns the index of
-// the parent node
-inline int parent(int i) {
-  return (i - 1) / 2;
-}
-
-// Returns the index of
-// the left_child_node_idx child node
-inline int left_child_node_idx(int i) {
-  return 2 * i + 1;
-}
-
-// Returns the index of
-// the right_child_node_idx child node
-inline int right_child_node_idx(int i) {
-  return 2 * i + 2;
-}
-
-// Maintains the heap property
-void heapify(Heap &h, int i) {
-  int l = left_child_node_idx(i), r = right_child_node_idx(i), m = i;
-  if (l < h.n && h.v[i] > h.v[l])
-    m = l;
-  if (r < h.n && h.v[m] > h.v[r])
-    m = r;
-  if (m != i) {
-    swap(h.v[m], h.v[i]);
-    heapify(h, m);
-  }
-}
-
-// Extracts the minimum element
-int extractMin(Heap &h) {
-  if (!h.n)
-    return -1;
-  int m = h.v[0];
-  h.v[0] = h.v[h.n-- - 1];
-  heapify(h, 0);
-  return m;
-}
-
-int findKthSmallest(Heap &h, int k) {
-  for (int i = 1; i < k; ++i)
-    extractMin(h);
-  return extractMin(h);
-}
-
 int main() {
-  Heap h(7);
-  h.v = vector<int>{10, 50, 40, 75, 60, 65, 45};
-  int k = 2;
-  cout << findKthSmallest(h, k);
+  A *a = new A(1.0), *b = new A(*a);
+  cout << a->get(b->set(a->v));
   return 0;
 }
+
