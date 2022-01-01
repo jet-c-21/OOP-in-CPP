@@ -4,7 +4,7 @@ GitHub: https://github.com/jet-c-21
 
 Rock : 1
 Paper : 2
-Scisscors : 3
+Scissors : 3
 *******************************************************************************/
 #include <stdlib.h> /* srand, rand */
 #include <time.h>   /* time */
