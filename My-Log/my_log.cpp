@@ -2,6 +2,8 @@
 
 class Log {
  public:
+  enum Level
+
   const int kLogLevelError = 0;
   const int kLogLevelWarning = 1;
   const int kLogLevelInfo = 2;
